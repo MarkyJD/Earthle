@@ -11,11 +11,11 @@ export default function Header({ className }: Props) {
   return (
     <header className={className}>
       <div className="h-full w-full flex items-center justify-between">
-        <h1 className="text-3xl text-shadow-sm font-display text-sky-600 dark:text-sky-600">
+        <h1 className="text-3xl text-shadow-sm font-display text-sky-700 dark:text-sky-700">
           Earthle
         </h1>
         <button
-          className="transition text-3xl text-amber-500 dark:text-sky-700 p-1 rounded hover:bg-stone-300 dark:hover:bg-stone-600"
+          className="transition text-3xl text-amber-500 dark:text-sky-700 p-1 rounded hover:bg-stone-200 dark:hover:bg-stone-700"
           type="button"
           onClick={toggleDarkMode}
         >

@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Theme from './contexts/Theme';
 import useDarkMode from './hooks/useDarkMode';
-import Home from './pages/Home';
+import Game from './pages/Game';
 import NotFound from './pages/NotFound';
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Game />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
