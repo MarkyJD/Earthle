@@ -6,7 +6,7 @@ import GuessMap from './GuessMap';
 // const CENTER = { lat: -34.397, lng: 150.644 };
 const CENTER = { lat: 43.31613189259254, lng: -91.80256027484972 };
 const ZOOM = 3;
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBuru38qrAC_IZz0F1P46cXh7OWc0g_f3I';
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 const renderGuessMap = (status: Status) => {
   switch (status) {
