@@ -1,5 +1,5 @@
 import HowToPlayModal from '../components/HowToPlayModal';
-import Map from '../components/Map/Map';
+import MapsWrapper from '../components/Map/MapsWrapper';
 
 export default function Game() {
   return (
@@ -14,7 +14,7 @@ export default function Game() {
 
         <HowToPlayModal />
       </header>
-      <Map />
+      <MapsWrapper />
     </div>
   );
 }
