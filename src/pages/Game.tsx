@@ -1,20 +1,22 @@
-import HowToPlayModal from '../components/HowToPlayModal';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import MapsWrapper from '../components/Map/MapsWrapper';
 
 export default function Game() {
-  return (
-    <div className="h-full w-full flex flex-col">
-      <header className="flex items-center justify-between mb-5">
-        <h1 className="text-3xl font-medium text-stone-500">
-          Welcome to{' '}
-          <span className=" text-stone-800 dark:text-stone-100 underline underline-offset-4 decoration-sky-700">
-            Earthle
-          </span>
-        </h1>
+  const [name, setName] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const playername = location?.state ? location.state.name : null;
 
-        <HowToPlayModal />
-      </header>
-      <MapsWrapper />
-    </div>
-  );
+  // Check if player has entered a name, if not redirect to home
+  useEffect(() => {
+    if (!playername) {
+      navigate('/');
+    } else {
+      setName(playername);
+    }
+  }, [playername, navigate]);
+
+  // Only render the game if the player has entered a name. This prevents unnecessary google api calls
+  return name ? <MapsWrapper /> : null;
 }

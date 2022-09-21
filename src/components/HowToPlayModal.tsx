@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { BiHelpCircle } from 'react-icons/bi';
 
 export default function HowToPlayModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,14 +30,14 @@ export default function HowToPlayModal() {
     <>
       <button
         type="button"
-        className="hover:underline decoration-2 decoration-sky-700 text-sm font-bold"
+        className="text-3xl p-1 hover:bg-stone-200 dark:hover:bg-stone-700 rounded"
         onClick={() => setIsOpen(!isOpen)}
       >
-        How to Play
+        <BiHelpCircle />
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 py-20 px-2 z-10 flex items-center justify-center dark:bg-black/30 bg-black/50">
+        <div className="z-50 fixed inset-0 py-20 px-2  flex items-center justify-center dark:bg-black/30 bg-black/50">
           <div
             ref={modalRef}
             className="bg-stone-100 rounded shadow-md w-full h-full max-w-screen-md border-2 border-sky-700 p-5 "

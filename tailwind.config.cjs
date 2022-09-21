@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ["'Alfa Slab One'", 'cursive'],
+        disp: ["'Lilita One'", 'cursive'],
         hand: ["'Kalam'", 'cursive'],
         customSans: ["'Source Sans Pro'", 'sans-serif'],
         customSerif: ["'Merriweather'", 'serif'],

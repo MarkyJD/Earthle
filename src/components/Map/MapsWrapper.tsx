@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import { BiCheck, BiMapAlt, BiX } from 'react-icons/bi';
 import ChallengeMap from './ChallengeMap';
 import GuessMap from './GuessMap';
 
-// const CENTER = { lat: -34.397, lng: 150.644 };
 const CENTER = { lat: 43.31613189259254, lng: -91.80256027484972 };
 const ZOOM = 3;
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'error';
 
 const renderGuessMap = (status: Status) => {
   switch (status) {
@@ -35,21 +35,40 @@ const renderChallengeMap = (status: Status) => {
 };
 
 export default function MapsWrapper() {
+  const [guess, setGuess] = useState<google.maps.LatLngLiteral>();
   const [makeGuess, setMakeGuess] = useState(false);
   return (
-    <div className="h-full w-full relative rounded overflow-hidden shadow">
-      <Wrapper apiKey={GOOGLE_MAPS_API_KEY || ''} render={renderChallengeMap} />
-      {makeGuess && (
-        <div className="z-20 rounded-md overflow-hidden shadow-md w-5/6 h-3/4 absolute md:w-3/4 md:h-1/2 bottom-28 inset-x-0 mx-auto">
-          <Wrapper apiKey={GOOGLE_MAPS_API_KEY || ''} render={renderGuessMap} />
-        </div>
-      )}
+    <div className="h-full w-full border-2 border-stone-400 dark:border-stone-500 relative rounded-md overflow-hidden shadow-md">
+      <Wrapper apiKey={apiKey} render={renderChallengeMap} />
+
+      <div
+        className={`${
+          !makeGuess ? 'hidden' : 'block'
+        } z-10 rounded-md overflow-hidden shadow-md w-5/6 h-3/4 absolute md:w-3/4 md:h-1/2 bottom-28 inset-x-0 mx-auto`}
+      >
+        <Wrapper apiKey={apiKey} render={renderGuessMap} />
+      </div>
+
+      {/* Open and Close map buttons */}
       <button
         onClick={() => setMakeGuess(!makeGuess)}
-        className="z-10 absolute bottom-8 inset-x-0 mx-auto left w-14 h-14 rounded-full bg-green-600"
+        className={`${makeGuess ? 'button-red' : 'button-blue'}`}
         type="button"
       >
-        hi
+        {!makeGuess && <BiMapAlt />}
+        {makeGuess && <BiX />}
+      </button>
+
+      {/* Submit guess */}
+      <button
+        disabled={!guess}
+        onClick={() => {}}
+        type="button"
+        className={`button-green ${makeGuess && 'translate-x-16'} transition ${
+          !guess && 'opacity-50 hover:bg-emerald-700'
+        } `}
+      >
+        <BiCheck />
       </button>
     </div>
   );

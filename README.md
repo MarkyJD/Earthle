@@ -10,3 +10,10 @@ Daily location guessing game
 - TailwindCSS
 - Firebase
 - Google Maps Api
+
+o
+
+## TODOs
+
+- [ ] Add ability to create account
+- [ ] Leaderboards
