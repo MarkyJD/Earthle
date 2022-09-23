@@ -5,8 +5,6 @@ import ChallengeMap from './ChallengeMap';
 import GuessMap from './GuessMap';
 import { GUESS_MAP_FIELDS } from '../../constants';
 
-const CENTER = { lat: 43.31613189259254, lng: -91.80256027484972 };
-const ZOOM = 3;
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'error';
 
 interface Props {
@@ -42,7 +40,7 @@ export default function MapsWrapper({ challengeLocation }: Props) {
       case Status.FAILURE:
         return <p>Failed...</p>;
       case Status.SUCCESS:
-        return <ChallengeMap location={CENTER} />;
+        return <ChallengeMap location={challengeLocation} />;
       default:
         return <p>Error</p>;
     }

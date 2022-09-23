@@ -5,3 +5,11 @@ export interface LeaderboardData {
   uid: string;
   country: string;
 }
+
+export interface TLocation {
+  date: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
