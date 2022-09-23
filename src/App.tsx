@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import { ROUTES } from './constants';
 import Theme from './contexts/Theme';
 import useDarkMode from './hooks/useDarkMode';
 import Game from './pages/Game';
@@ -10,9 +11,9 @@ import NotFound from './pages/NotFound';
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/play" element={<Game />} />
-      <Route path="/leaderboards" element={<Leaderboards />} />
+      <Route path={ROUTES.HOME} element={<Home />} />
+      <Route path={ROUTES.PLAY} element={<Game />} />
+      <Route path={ROUTES.LEADERBOARDS} element={<Leaderboards />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

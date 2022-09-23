@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../constants';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
 
     // Create user in firebase
 
-    navigate('/play', {
+    navigate(ROUTES.PLAY, {
       state: {
         name,
       },

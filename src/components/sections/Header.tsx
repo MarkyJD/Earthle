@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png';
 import DarkModeToggle from '../DarkModeToggle';
 import Dropdown from '../Dropdown';
 import LoginButton from '../LoginButton';
+import { ROUTES } from '../../constants';
 
 interface Props {
   className?: string;
@@ -24,7 +25,7 @@ export default function Header({ className }: Props) {
           <button
             type="button"
             className="text-3xl p-1 hover:bg-stone-200 dark:hover:bg-stone-700 rounded"
-            onClick={() => navigate('/leaderboards')}
+            onClick={() => navigate(ROUTES.LEADERBOARDS)}
           >
             <BiTable />
           </button>
