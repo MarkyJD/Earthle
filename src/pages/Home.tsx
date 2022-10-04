@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="h-full w-full">
-      <main className="border-2  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
+      <main className="border-2 overflow-y-auto  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
         <div className="bg-black relative h-full w-full">
           <img
             src="src/assets/world.png"
