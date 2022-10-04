@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { CHALLENGE_MAP_FIELDS } from '../../constants';
+import GameContext from '../../contexts/GameContext';
 // @ts-ignore
 
 interface MapProps extends google.maps.MapOptions {
   location: google.maps.LatLngLiteral;
 }
 export default function ChallengeMap({ location }: MapProps) {
+  // @ts-ignore
+  const { getTrueLocation } = useContext(GameContext);
   const ref = useRef<HTMLDivElement>(null);
   const [pano, setPano] = useState<google.maps.StreetViewPanorama>();
 
@@ -14,7 +17,7 @@ export default function ChallengeMap({ location }: MapProps) {
       const streetViewService = new google.maps.StreetViewService();
       const streetViewRequest = {
         location,
-        radius: 10000,
+        radius: CHALLENGE_MAP_FIELDS.RADIUS,
         source: google.maps.StreetViewSource.OUTDOOR,
       };
 
@@ -23,12 +26,17 @@ export default function ChallengeMap({ location }: MapProps) {
       await streetViewService.getPanorama(streetViewRequest, (data, status) => {
         console.log(data);
         console.log(status);
+        let isDefault = true;
         if (status === google.maps.StreetViewStatus.OK) {
           // @ts-ignore
           position = data.location.latLng;
+          isDefault = false;
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         } else {
           position = CHALLENGE_MAP_FIELDS.DEFAULT_LOCATION;
         }
+
+        getTrueLocation(position, isDefault);
       });
 
       const streetViewPanoramaOptions = {
