@@ -9,6 +9,7 @@ export default function Game() {
   const location = useLocation();
   const navigate = useNavigate();
   const playername = location?.state ? location.state.name : null;
+  const debugDate = location?.state ? location.state.debugDate : null;
 
   // Check if player has entered a name, if not redirect to home
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Game() {
 
   // Only render the game if the player has entered a name. This prevents unnecessary google api calls
   return name ? (
-    <GameProvider>
+    <GameProvider debugDate={debugDate}>
       <MapsWrapper playername={playername} />
     </GameProvider>
   ) : null;

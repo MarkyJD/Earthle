@@ -1,11 +1,14 @@
+/* eslint-disable no-else-return */
 import { useState, useContext, useEffect } from 'react';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
-import { BiCheck, BiMapAlt, BiX } from 'react-icons/bi';
+import { BiCheck, BiListOl, BiMapAlt, BiSave, BiX } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
 import ChallengeMap from './ChallengeMap';
 import GuessMap from './GuessMap';
 import { GUESS_MAP_FIELDS } from '../../constants';
 import GameContext from '../../contexts/GameContext';
 import { round } from '../../helpers';
+import { TResults } from '../../../typings';
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'error';
 
@@ -86,6 +89,38 @@ export default function MapsWrapper({ playername }: { playername: string }) {
     setPath([trueLocation, guess]);
   };
 
+  function getMessage(res: TResults, name: string): string {
+    const d = res.distance;
+
+    if (d > 10000) {
+      return `...disappointing, ${name}`;
+    } else if (d > 5000) {
+      return `...not great ${name}`;
+    } else if (d > 2000) {
+      return `Well ${name}, it could be worse`;
+    } else if (d > 1000) {
+      return `Not bad ${name}, not bad at all`;
+    } else if (d > 500) {
+      return `"Alright, Alright, Alright - Matthew McConaughey" - ${name}`;
+    } else if (d > 100) {
+      return `Oh ${name}, you're a real smart cookie`;
+    } else if (d > 50) {
+      return `${name}, vedy vedy close indeed`;
+    } else if (d > 10) {
+      return `Who are you, Shooter Mc${name}?`;
+    } else if (d > 1) {
+      return `Lord ${name}, King of the Guessers`;
+    } else if (d > 0.5) {
+      return `You're a wizard, ${name}`;
+    } else if (d > 0.1) {
+      return `Bloody hell ${name}, this is getting ridiculous`;
+    } else if (d > 0.05) {
+      return `wtf ${name}, this is absurd`;
+    } else {
+      return `ALL HAIL ${name.toUpperCase()}, THE GOLDEN GOD!!!`;
+    }
+  }
+
   return (
     <div className="h-full w-full border-2 border-stone-400 dark:border-stone-500 relative rounded-md overflow-hidden shadow-md">
       {/* Challenge map (Street View) */}
@@ -94,28 +129,37 @@ export default function MapsWrapper({ playername }: { playername: string }) {
       </Wrapper>
 
       {results && (
-        <div className="absolute bg-black/70 text-stone-100 text-xl py-20 font-customSerif z-20 top-0 w-full flex justify-center items-center">
-          <div className="space-y-3 flex flex-col w-3/4 mx-auto">
-            <h2>
-              Name:{' '}
-              <span className="text-3xl font-disp text-emerald-500">
-                {playername}
+        <div className="absolute bg-black/70 text-stone-100 text-xl py-5 md:py-10 font-customSerif z-20 top-0 w-full flex justify-center items-center">
+          <div className="space-y-3 flex items-center text-base md:text-lg flex-col w-full md:w-3/4 px-5 md:px-0 mx-auto">
+            <h2 className="text-xl md:text-3xl  font-disp text-sky-500">
+              {getMessage(results, playername)}
+            </h2>
+
+            <h2 className="text-2xl md:text-5xl font-disp text-emerald-500">
+              {results.distance > 1
+                ? `${round(results.distance, 4)} `
+                : `${round(results.distance * 1000)} `}
+              <span className="text-xl md:text-2xl  text-emerald-700">
+                {results.distance > 1 ? 'km' : 'm'}
               </span>
             </h2>
-            <h2>
-              Distance:{' '}
-              <span className="text-3xl font-disp text-emerald-500">
-                {`${results.distance} `}
-                <span className="text-xl text-emerald-700">km</span>
-              </span>
-            </h2>
-            <h2>
-              Rounded Distance:{' '}
-              <span className="text-3xl font-disp text-emerald-500">
-                {`${round(results.distance, 4)} `}
-                <span className="text-xl text-emerald-700">km</span>
-              </span>
-            </h2>
+            {/* Conditionally render this if logged in or not */}
+            <p className="font-customSans text-stone-300 text-base">
+              <Link to="/login">
+                <span className="font-semibold underline">Login</span>
+              </Link>{' '}
+              to save your score to our leaderboards
+            </p>
+            <div className="flex items-center justify-center space-x-3 w-full">
+              <Link to="/leaderboards">
+                <button
+                  type="button"
+                  className="transition text-3xl text-stone-100 hover:text-emerald-500"
+                >
+                  <BiListOl />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       )}

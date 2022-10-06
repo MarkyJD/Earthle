@@ -13,3 +13,9 @@ export interface TLocation {
     lng: number;
   };
 }
+
+export interface TResults {
+  trueLocation: google.maps.LatLngLiteral;
+  guess: google.maps.LatLngLiteral;
+  distance: number;
+}

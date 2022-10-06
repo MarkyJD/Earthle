@@ -1,19 +1,16 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useEffect, useState } from 'react';
+import { TResults } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
 import GameContext from '../contexts/GameContext';
 
-interface TResults {
-  trueLocation: google.maps.LatLngLiteral;
-  guess: google.maps.LatLngLiteral;
-  distance: number;
-}
-
 interface Props {
   children: React.ReactNode;
+  debugDate?: Date;
 }
 
-export default function GameProvider({ children }: Props) {
+export default function GameProvider({ children, debugDate }: Props) {
+  const [date, setDate] = useState(debugDate || new Date());
   const [results, setResults] = useState<TResults>();
   const [todaysLocation, setTodaysLocation] =
     useState<google.maps.LatLngLiteral | null>();
@@ -45,12 +42,12 @@ export default function GameProvider({ children }: Props) {
 
   useEffect(() => {
     async function fetchLocation() {
-      const latLng = await getTodaysLocation(new Date());
+      const latLng = await getTodaysLocation(date);
       setTodaysLocation(latLng);
     }
 
     fetchLocation();
-  }, []);
+  }, [date]);
 
   // console.log('todaysLocation:', todaysLocation);
   // console.log('trueLocation:', trueLocation);
@@ -70,3 +67,7 @@ export default function GameProvider({ children }: Props) {
     </GameContext.Provider>
   ) : null;
 }
+
+GameProvider.defaultProps = {
+  debugDate: null,
+};
