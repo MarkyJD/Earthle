@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { useEffect, useState } from 'react';
-import { TResults } from '../../typings';
+import { useEffect, useState, useContext } from 'react';
+import { TResults, TUser } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
 import GameContext from '../contexts/GameContext';
+import AuthContext from '../contexts/AuthContext';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export default function GameProvider({ children, debugDate }: Props) {
-  const [date, setDate] = useState(debugDate || new Date());
+  const { updateCookie } = useContext(AuthContext);
   const [results, setResults] = useState<TResults>();
   const [todaysLocation, setTodaysLocation] =
     useState<google.maps.LatLngLiteral | null>();
@@ -18,9 +19,10 @@ export default function GameProvider({ children, debugDate }: Props) {
 
   const handleGuess = (
     location: google.maps.LatLngLiteral,
-    distance: number
+    distance: number,
+    playername: string
   ) => {
-    console.log(`I guessed ${location.lat}, ${location.lng}`);
+    // console.log(`I guessed ${location.lat}, ${location.lng}`);
 
     if (trueLocation) {
       setResults({
@@ -29,6 +31,25 @@ export default function GameProvider({ children, debugDate }: Props) {
         distance,
       });
     }
+
+    let country = 'none';
+
+    if (Intl) {
+      // eslint-disable-next-line prefer-destructuring
+      country = Intl.DateTimeFormat().resolvedOptions().timeZone.split('/')[0];
+    }
+
+    const userCookie: TUser = {
+      guest: true,
+      userCookie: {
+        name: playername,
+        score: distance,
+        uid: playername,
+        timestamp: new Date().toDateString(),
+        country,
+      },
+    };
+    updateCookie(userCookie);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,13 +62,15 @@ export default function GameProvider({ children, debugDate }: Props) {
   };
 
   useEffect(() => {
+    const date = debugDate || new Date();
+
     async function fetchLocation() {
       const latLng = await getTodaysLocation(date);
       setTodaysLocation(latLng);
     }
 
     fetchLocation();
-  }, [date]);
+  }, [debugDate]);
 
   // console.log('todaysLocation:', todaysLocation);
   // console.log('trueLocation:', trueLocation);

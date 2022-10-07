@@ -19,3 +19,24 @@ export interface TResults {
   guess: google.maps.LatLngLiteral;
   distance: number;
 }
+
+export interface TUser {
+  authUser?: {
+    uid: string;
+    email: string;
+    displayName: string;
+  };
+  guest: boolean;
+  userCookie: {
+    uid: string;
+    name: string;
+    country: string;
+    timestamp: string;
+    score: number;
+  };
+}
+
+export interface TAuthContext {
+  cookie: TUser | null;
+  updateCookie: (cookie: TUser) => void;
+}

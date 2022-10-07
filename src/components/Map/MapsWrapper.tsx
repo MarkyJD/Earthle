@@ -84,7 +84,7 @@ export default function MapsWrapper({ playername }: { playername: string }) {
     if (!guess) {
       return;
     }
-    handleGuess(guess, haversineDistance(guess, trueLocation));
+    handleGuess(guess, haversineDistance(guess, trueLocation), playername);
     setGuessSubmitted(true);
     setPath([trueLocation, guess]);
   };
