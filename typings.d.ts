@@ -1,7 +1,8 @@
-export interface LeaderboardData {
+export interface TLeaderboardData {
   name: string;
   score: number;
-  createdAt: Date;
+  createdAt: firebase.firestore.serverTimestamp;
+  date: string;
   uid: string;
   country: string;
 }
@@ -39,4 +40,10 @@ export interface TUser {
 export interface TAuthContext {
   cookie: TUser | null;
   updateCookie: (cookie: TUser) => void;
+  app: firebase.app.App | null;
+  db: firebase.firestore.Firestore | null;
+  provider: firebase.auth.GoogleAuthProvider | null;
+  authUser: firebase.User | null;
+  signInWithEmailAndPassword: Firebase.auth.Auth['signInWithEmailAndPassword'];
+  signOut: Firebase.auth.Auth['signOut'];
 }

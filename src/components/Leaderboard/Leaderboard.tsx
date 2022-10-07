@@ -5,11 +5,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useState, useEffect } from 'react';
-import { LeaderboardData } from '../../../typings';
+import { TLeaderboardData } from '../../../typings';
 import COLUMNS from '../../constants/columns';
 
 interface LeaderboardProps {
-  fetchedData: [LeaderboardData];
+  fetchedData: [TLeaderboardData];
   page: number;
   fetchData: (page: number) => void;
 }
@@ -19,7 +19,7 @@ export default function Leaderboard({
   page,
   fetchData,
 }: LeaderboardProps) {
-  const [data, setData] = useState<[LeaderboardData]>(() => [...fetchedData]);
+  const [data, setData] = useState<[TLeaderboardData]>(() => [...fetchedData]);
   const columns = COLUMNS;
 
   const table = useReactTable({

@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useEffect, useState, useContext } from 'react';
-import { TResults, TUser } from '../../typings';
+import { serverTimestamp } from 'firebase/firestore';
+import { TLeaderboardData, TResults, TUser } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
 import GameContext from '../contexts/GameContext';
 import AuthContext from '../contexts/AuthContext';
+import { addEntryToLeaderboard } from '../services/firestore';
 
 interface Props {
   children: React.ReactNode;
@@ -17,7 +19,7 @@ export default function GameProvider({ children, debugDate }: Props) {
     useState<google.maps.LatLngLiteral | null>();
   const [trueLocation, setTrueLocation] = useState<google.maps.LatLngLiteral>();
 
-  const handleGuess = (
+  const handleGuess = async (
     location: google.maps.LatLngLiteral,
     distance: number,
     playername: string
@@ -50,6 +52,18 @@ export default function GameProvider({ children, debugDate }: Props) {
       },
     };
     updateCookie(userCookie);
+
+    // Add to leaderboard
+    const leaderboardEntry: TLeaderboardData = {
+      name: playername,
+      score: distance,
+      createdAt: serverTimestamp(),
+      date: new Date().toDateString(),
+      uid: playername,
+      country,
+    };
+
+    await addEntryToLeaderboard(leaderboardEntry);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
