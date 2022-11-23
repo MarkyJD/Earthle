@@ -6,6 +6,7 @@ import getTodaysLocation from '../assets/challengeLocations/locations';
 import GameContext from '../contexts/GameContext';
 import AuthContext from '../contexts/AuthContext';
 import { addEntryToLeaderboard } from '../services/firestore';
+import { CHALLENGE_MAP_FIELDS } from '../constants';
 
 interface Props {
   children: React.ReactNode;
@@ -80,7 +81,11 @@ export default function GameProvider({ children, debugDate }: Props) {
 
     async function fetchLocation() {
       const latLng = await getTodaysLocation(date);
-      setTodaysLocation(latLng);
+      if (latLng) {
+        setTodaysLocation(latLng);
+      } else {
+        setTodaysLocation(CHALLENGE_MAP_FIELDS.DEFAULT_LOCATION);
+      }
     }
 
     fetchLocation();
