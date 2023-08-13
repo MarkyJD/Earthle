@@ -43,12 +43,11 @@ export default function Home() {
             className="object-cover h-full w-auto opacity-90"
           />
 
-          <div className="absolute inset-x-0 mx-auto top-20 text-stone-100 bg-black/50 py-10 px-5 flex flex-col">
+          <div className="absolute inset-0 mx-auto text-stone-100 bg-black/30 py-10 px-5 flex flex-col justify-center">
             <Welcome
-              title="Earthle"
-              description="Earthle is a daily location guessing game where you can compete
-              with friends and others around the world."
-              cta="To begin playin, enter a name below and hit play!"
+              title="Worlder"
+              description="Your goal is to guess the location of the image shown on the map. You will be given a score based on how close your guess is to the actual location."
+              cta="To begin playing, enter a name below and hit play! Good luck!"
             />
 
             <NameForm

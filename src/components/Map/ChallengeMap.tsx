@@ -24,8 +24,6 @@ export default function ChallengeMap({ location }: MapProps) {
       let position = null;
 
       await streetViewService.getPanorama(streetViewRequest, (data, status) => {
-        console.log(data);
-        console.log(status);
         let isDefault = true;
         if (status === google.maps.StreetViewStatus.OK) {
           // @ts-ignore

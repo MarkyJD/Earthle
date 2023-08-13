@@ -18,17 +18,16 @@ export default function Header({ className }: Props) {
       <div className="h-full w-full flex items-center justify-between">
         <Link to="/">
           <h1 className="flex items-center text-3xl font-bold text-shadow-sm font-disp text-emerald-700">
-            Earthle
+            Worlder
           </h1>
         </Link>
         <div className="flex items-center space-x-3">
-          <button
-            type="button"
+          <Link
+            to={ROUTES.LEADERBOARDS}
             className="text-3xl p-1 hover:bg-stone-200 dark:hover:bg-stone-700 rounded"
-            onClick={() => navigate(ROUTES.LEADERBOARDS)}
           >
             <BiTable />
-          </button>
+          </Link>
           <HowToPlayModal />
           <Dropdown Icon={BiCog}>
             <DarkModeToggle />

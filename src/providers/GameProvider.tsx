@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { TResults } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
+import { CHALLENGE_MAP_FIELDS } from '../constants';
 import GameContext from '../contexts/GameContext';
 
 interface Props {
@@ -43,7 +44,11 @@ export default function GameProvider({ children, debugDate }: Props) {
   useEffect(() => {
     async function fetchLocation() {
       const latLng = await getTodaysLocation(date);
-      setTodaysLocation(latLng);
+      if (latLng) {
+        setTodaysLocation(latLng);
+      } else {
+        setTodaysLocation(CHALLENGE_MAP_FIELDS.DEFAULT_LOCATION);
+      }
     }
 
     fetchLocation();
