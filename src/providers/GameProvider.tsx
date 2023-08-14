@@ -7,7 +7,6 @@ import { CHALLENGE_MAP_FIELDS } from '../constants';
 import GameContext from '../contexts/GameContext';
 import AuthContext from '../contexts/AuthContext';
 import { addEntryToLeaderboard } from '../services/firestore';
-import { CHALLENGE_MAP_FIELDS } from '../constants';
 
 interface Props {
   children: React.ReactNode;
