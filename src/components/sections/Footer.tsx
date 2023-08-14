@@ -10,11 +10,11 @@ export default function Footer({ className }: Props) {
           className="hover:text-stone-400 hover:dark:text-stone-500"
           href="https://github.com/MarkyJD"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           Built by Mark Dodson
         </a>
-        <p>All Rights Reserved &copy; 2022</p>
+        <p>All Rights Reserved &copy; 2023</p>
       </div>
     </footer>
   );

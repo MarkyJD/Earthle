@@ -1,9 +1,13 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { useEffect, useState } from 'react';
-import { TResults } from '../../typings';
+import { useEffect, useState, useContext } from 'react';
+import { serverTimestamp } from 'firebase/firestore';
+import { TLeaderboardData, TResults, TUser } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
 import { CHALLENGE_MAP_FIELDS } from '../constants';
 import GameContext from '../contexts/GameContext';
+import AuthContext from '../contexts/AuthContext';
+import { addEntryToLeaderboard } from '../services/firestore';
+import { CHALLENGE_MAP_FIELDS } from '../constants';
 
 interface Props {
   children: React.ReactNode;
@@ -11,17 +15,18 @@ interface Props {
 }
 
 export default function GameProvider({ children, debugDate }: Props) {
-  const [date, setDate] = useState(debugDate || new Date());
+  const { updateCookie } = useContext(AuthContext);
   const [results, setResults] = useState<TResults>();
   const [todaysLocation, setTodaysLocation] =
     useState<google.maps.LatLngLiteral | null>();
   const [trueLocation, setTrueLocation] = useState<google.maps.LatLngLiteral>();
 
-  const handleGuess = (
+  const handleGuess = async (
     location: google.maps.LatLngLiteral,
-    distance: number
+    distance: number,
+    playername: string
   ) => {
-    console.log(`I guessed ${location.lat}, ${location.lng}`);
+    // console.log(`I guessed ${location.lat}, ${location.lng}`);
 
     if (trueLocation) {
       setResults({
@@ -30,6 +35,37 @@ export default function GameProvider({ children, debugDate }: Props) {
         distance,
       });
     }
+
+    let country = 'none';
+
+    if (Intl) {
+      // eslint-disable-next-line prefer-destructuring
+      country = Intl.DateTimeFormat().resolvedOptions().timeZone.split('/')[0];
+    }
+
+    const userCookie: TUser = {
+      guest: true,
+      userCookie: {
+        name: playername,
+        score: distance,
+        uid: playername,
+        timestamp: new Date().toDateString(),
+        country,
+      },
+    };
+    updateCookie(userCookie);
+
+    // Add to leaderboard
+    const leaderboardEntry: TLeaderboardData = {
+      name: playername,
+      score: distance,
+      createdAt: serverTimestamp(),
+      date: new Date().toDateString(),
+      uid: `${playername}--${new Date().toISOString()}`,
+      country,
+    };
+
+    await addEntryToLeaderboard(leaderboardEntry);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,6 +78,8 @@ export default function GameProvider({ children, debugDate }: Props) {
   };
 
   useEffect(() => {
+    const date = debugDate || new Date();
+
     async function fetchLocation() {
       const latLng = await getTodaysLocation(date);
       if (latLng) {
@@ -52,7 +90,7 @@ export default function GameProvider({ children, debugDate }: Props) {
     }
 
     fetchLocation();
-  }, [date]);
+  }, [debugDate]);
 
   // console.log('todaysLocation:', todaysLocation);
   // console.log('trueLocation:', trueLocation);

@@ -5,11 +5,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useState, useEffect } from 'react';
-import { LeaderboardData } from '../../../typings';
+import { TLeaderboardData } from '../../../typings';
 import COLUMNS from '../../constants/columns';
 
 interface LeaderboardProps {
-  fetchedData: [LeaderboardData];
+  fetchedData: [TLeaderboardData];
   page: number;
   fetchData: (page: number) => void;
 }
@@ -19,7 +19,8 @@ export default function Leaderboard({
   page,
   fetchData,
 }: LeaderboardProps) {
-  const [data, setData] = useState<[LeaderboardData]>(() => [...fetchedData]);
+  console.log(fetchedData);
+  const [data, setData] = useState<[TLeaderboardData]>(() => [...fetchedData]);
   const columns = COLUMNS;
 
   const table = useReactTable({
@@ -30,10 +31,13 @@ export default function Leaderboard({
 
   return (
     <div className="h-full w-full">
-      <table className="w-full h-full text-base text-left">
+      <table className="w-full max-h-full text-base text-left">
         <thead className="sticky top-0 text-sm uppercase text-stone-100 bg-emerald-800">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
+              <th scope="col" className="px-2 py-3 md:px-6">
+                Rank
+              </th>
               {headerGroup.headers.map((header) => (
                 <th scope="col" className="px-2 py-3 md:px-6" key={header.id}>
                   {header.isPlaceholder
@@ -48,11 +52,12 @@ export default function Leaderboard({
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
+          {table.getRowModel().rows.map((row, rowIndex) => (
             <tr
               className="bg-stone-100 dark:bg-stone-800 border-b border-stone-300 dark:border-stone-700 hover:bg-stone-200 dark:hover:bg-stone-700"
               key={row.id}
             >
+              <td className="px-2 py-4 md:px-6 font-disp">{rowIndex + 1}</td>
               {row.getVisibleCells().map((cell) => (
                 <td className="px-2 py-4 md:px-6" key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -62,7 +67,7 @@ export default function Leaderboard({
           ))}
         </tbody>
 
-        <tfoot className="sticky bottom-0 text-sm bg-emerald-800 text-stone-100 uppercase">
+        {/* <tfoot className="sticky bottom-0 text-sm bg-emerald-800 text-stone-100 uppercase">
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
@@ -77,7 +82,7 @@ export default function Leaderboard({
               ))}
             </tr>
           ))}
-        </tfoot>
+        </tfoot> */}
       </table>
     </div>
   );

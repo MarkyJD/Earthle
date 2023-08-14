@@ -15,11 +15,11 @@ export default function NameForm({
     <form
       action="play"
       onSubmit={handleSubmit}
-      className="flex flex-col items-center max-w-screen-sm mx-auto"
+      className="flex flex-col  max-w-screen-sm mx-auto"
     >
       <label
         htmlFor="name"
-        className="font-customSerif font-bold text-2xl mb-5"
+        className="font-customSerif font-bold text-base mb-3"
       >
         Name:{' '}
       </label>

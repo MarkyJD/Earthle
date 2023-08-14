@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { ROUTES } from './constants';
@@ -7,6 +8,7 @@ import Game from './pages/Game';
 import Home from './pages/Home';
 import Leaderboards from './pages/Leaderboards';
 import NotFound from './pages/NotFound';
+import AuthProvider from './providers/AuthProvider';
 
 export function App() {
   return (
@@ -21,15 +23,17 @@ export function App() {
 
 export function WrappedApp() {
   const [isDarkMode, toggleDarkMode] = useDarkMode();
+
   return (
     // @ts-ignore
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <Theme.Provider value={{ isDarkMode, toggleDarkMode }}>
-      <Router>
-        <Layout>
-          <App />
-        </Layout>
-      </Router>
-    </Theme.Provider>
+    <AuthProvider>
+      <Theme.Provider value={{ isDarkMode, toggleDarkMode }}>
+        <Router>
+          <Layout>
+            <App />
+          </Layout>
+        </Router>
+      </Theme.Provider>
+    </AuthProvider>
   );
 }
