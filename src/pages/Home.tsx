@@ -57,7 +57,7 @@ export default function Home() {
         <main className="border-2 overflow-y-auto  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
           <div className="bg-black relative h-full w-full">
             <img
-              src="src/assets/world.png"
+              src="public/world.png"
               alt="world"
               className="object-cover h-full w-auto opacity-90"
             />
@@ -108,18 +108,16 @@ export default function Home() {
       <main className="border-2 overflow-y-auto  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
         <div className="bg-black relative h-full w-full">
           <img
-            src="src/assets/world.png"
+            src="public/world.png"
             alt="world"
             className="object-cover h-full w-auto opacity-90"
           />
-
 
           <div className="absolute inset-0 mx-auto text-stone-900 dark:text-stone-100 bg-white/40 dark:bg-black/50 px-5 flex flex-col justify-center py-10">
             <Welcome
               title="Worlder"
               description="Your goal is to guess the location of the Street View image on the map. The lower your score, the better!"
               cta="To begin playin, enter a name below and hit play!"
-
             />
             {error !== '' && (
               <p className="text-center text-shadow bg-red-700/50 px-2 py-1 text-sm rounded w-max mx-auto shadow shadow-red-700/50 text-red-200">
