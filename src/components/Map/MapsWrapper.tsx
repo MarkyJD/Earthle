@@ -179,6 +179,7 @@ export default function MapsWrapper({ playername }: { playername: string }) {
             onClick={onClick}
             flightPath={flightPath}
             setFlightPath={setFlightPath}
+            gestureHandling="cooperative"
           >
             <Marker position={guess} icon={GUESS_MAP_FIELDS.BLUE_ICON} />
             {/* Show correct position when guessed */}

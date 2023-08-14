@@ -51,6 +51,7 @@ export default function GuessMap({
       const mapOptions: google.maps.MapOptions = {
         center,
         zoom,
+        gestureHandling: 'cooperative',
         streetViewControl: false,
         mapTypeControl: false,
       };
