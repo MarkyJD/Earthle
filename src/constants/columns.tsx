@@ -2,7 +2,7 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { TLeaderboardData } from '../../typings';
 import { round } from '../helpers';
 
-const columnHelper = createColumnHelper<LeaderboardData>();
+const columnHelper = createColumnHelper<TLeaderboardData>();
 
 const COLUMNS: ColumnDef<TLeaderboardData>[] = [
   // @ts-ignore
@@ -16,7 +16,7 @@ const COLUMNS: ColumnDef<TLeaderboardData>[] = [
   columnHelper.accessor('score', {
     header: 'Score (lower is better!)',
     cell: ({ getValue }) => {
-      const score = Number.parseFloat(getValue());
+      const score = getValue();
       let formattedScore = 0;
       if (score > 1) {
         formattedScore = round(score, 4);

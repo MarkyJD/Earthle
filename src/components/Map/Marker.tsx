@@ -1,4 +1,8 @@
-const Marker: React.FC<google.maps.MarkerOptions> = (options) => {
+/* eslint-disable */
+import React from 'react';
+
+// @ts-ignore
+export const Marker: React.FC<google.maps.MarkerOptions> = (options) => {
   const [marker, setMarker] = React.useState<google.maps.Marker>();
 
   React.useEffect(() => {
