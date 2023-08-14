@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
 import { TLeaderboardData, TResults, TUser } from '../../typings';
 import getTodaysLocation from '../assets/challengeLocations/locations';
+import { CHALLENGE_MAP_FIELDS } from '../constants';
 import GameContext from '../contexts/GameContext';
 import AuthContext from '../contexts/AuthContext';
 import { addEntryToLeaderboard } from '../services/firestore';

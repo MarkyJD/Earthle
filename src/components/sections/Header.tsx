@@ -66,13 +66,13 @@ export default function Header({ className }: Props) {
         </h2>
 
         <div className="flex justify-end items-center space-x-3">
-          <button
-            type="button"
+          <Link
+            to={ROUTES.LEADERBOARDS}
             className="text-3xl p-1 hover:bg-stone-200 dark:hover:bg-stone-700 rounded"
-            onClick={() => navigate(ROUTES.LEADERBOARDS)}
+            
           >
             <BiTable />
-          </button>
+          </Link>
           {/* <HowToPlayModal /> */}
           <DarkModeToggle />
           {/* <Dropdown Icon={BiCog}>
