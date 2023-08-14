@@ -24,7 +24,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [name, setName] = useState(cookie?.userCookie?.name || '');
   const [error, setError] = useState('');
-  const isValidName = name.length >= 3 && name.length <= 10;
+  const isValidName = name.length >= 1 && name.length <= 16;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
