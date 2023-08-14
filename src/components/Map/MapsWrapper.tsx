@@ -145,18 +145,16 @@ export default function MapsWrapper({ playername }: { playername: string }) {
             </h2>
             {/* Conditionally render this if logged in or not */}
             <p className="font-customSans text-stone-300 text-base">
-              <Link to="/login">
-                <span className="font-semibold underline">Login</span>
-              </Link>{' '}
-              to save your score to our leaderboards
+              See how you compare to other players on the leaderboard
+              <hr className="border-emerald-500/50 py-1 border-t mt-1" />
             </p>
-            <div className="flex items-center justify-center space-x-3 w-full">
+            <div className="flex items-center justify-center w-full">
               <Link to="/leaderboards">
                 <button
                   type="button"
-                  className="transition text-3xl text-stone-100 hover:text-emerald-500"
+                  className=" font-display transition px-3 py-2 border border-emerald-500 rounded-md text-emerald-500  hover:bg-emerald-500 hover:text-stone-700"
                 >
-                  <BiListOl />
+                  Leaderboards
                 </button>
               </Link>
             </div>

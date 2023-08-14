@@ -15,18 +15,18 @@ export default function NameForm({
     <form
       action="play"
       onSubmit={handleSubmit}
-      className="flex flex-col items-center max-w-screen-sm mx-auto"
+      className="flex flex-col  max-w-screen-sm mx-auto"
     >
       <label
         htmlFor="name"
-        className="font-customSerif font-bold text-2xl mb-5"
+        className="font-customSerif font-bold text-base mb-3"
       >
         Name:{' '}
       </label>
       <input
         id="name"
         type="text"
-        placeholder="Armadeus"
+        placeholder="Amadeus"
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="w-full mb-5  px-3 py-1 text-3xl rounded bg-emerald-100 outline-none border-2 border-emerald-600 focus:outline-emerald-400 shadow font-customSans font-bold text-stone-800"

@@ -7,12 +7,19 @@ interface WelcomeProps {
 export default function Welcome({ title, description, cta }: WelcomeProps) {
   return (
     <>
-      <h1 className="text-center text-shadow text-3xl md:text-5xl font-medium mb-5">
-        Welcome to <span className="font-customSerif font-bold">{title}</span>
+      <h1 className="max-w-md mx-auto w-full text-shadow text-xl md:text-2xl font-medium mb-3 md:mb-5">
+        Welcome to{' '}
+        <span className="block font-customSerif text-5xl md:text-7xl font-bold">
+          {title}
+        </span>
       </h1>
-      <p className="text-lg text-stone-300 mb-10 text-center">{description}</p>
-      <hr className="border-emerald-700 mb-10" />
-      <p className="text-center text-lg font-hand  mb-5">{cta}</p>
+      <p className="max-w-md mx-auto text-base dark:text-stone-300 text-stone-700">
+        {description}
+      </p>
+      <hr className="border-emerald-700 my-3 md:my-10  max-w-lg mx-auto w-full" />
+      <p className="max-w-md mx-auto text-base font-hand w-full text-center mb-5">
+        {cta}
+      </p>
     </>
   );
 }

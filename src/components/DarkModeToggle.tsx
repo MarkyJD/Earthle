@@ -14,16 +14,10 @@ export default function DarkModeToggle() {
     >
       {isDarkMode ? (
         <p className="flex items-center space-x-3">
-          <span className="text-base font-bold text-zinc-800 dark:text-zinc-100">
-            Theme
-          </span>
           <BiMoon />
         </p>
       ) : (
         <p className="flex items-center space-x-3">
-          <span className="text-base font-bold text-zinc-800 dark:text-zinc-100">
-            Theme
-          </span>
           <BiSun />
         </p>
       )}

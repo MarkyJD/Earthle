@@ -60,7 +60,7 @@ export default function GameProvider({ children, debugDate }: Props) {
       score: distance,
       createdAt: serverTimestamp(),
       date: new Date().toDateString(),
-      uid: playername,
+      uid: `${playername}--${new Date().toISOString()}`,
       country,
     };
 
