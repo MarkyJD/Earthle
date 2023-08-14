@@ -57,7 +57,7 @@ export default function Home() {
         <main className="border-2 overflow-y-auto  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
           <div className="bg-black relative h-full w-full">
             <img
-              src="public/world.png"
+              src="./world.png"
               alt="world"
               className="object-cover h-full w-auto opacity-90"
             />
@@ -108,7 +108,7 @@ export default function Home() {
       <main className="border-2 overflow-y-auto  border-stone-400 dark:border-stone-500 rounded-md h-full overflow-hidden bg-stone-300 dark:bg-stone-600">
         <div className="bg-black relative h-full w-full">
           <img
-            src="public/world.png"
+            src="./world.png"
             alt="world"
             className="object-cover h-full w-auto opacity-90"
           />
