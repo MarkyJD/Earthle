@@ -10,7 +10,7 @@ import GameContext from '../../contexts/GameContext';
 import { round } from '../../helpers';
 import { TResults } from '../../../typings';
 
-const apiKey = import.meta.env.GOOGLE_MAPS_API_KEY || 'error';
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'error';
 
 // eslint-disable-next-line react/function-component-definition
 const Marker: React.FC<google.maps.MarkerOptions> = (options) => {
