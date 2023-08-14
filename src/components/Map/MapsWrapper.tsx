@@ -166,7 +166,7 @@ export default function MapsWrapper({ playername }: { playername: string }) {
         className={`${!makeGuess ? 'hidden' : 'block'} ${
           guessSubmitted
             ? 'md:w-11/12 md:h-5/6 w-11/12 h-3/4'
-            : 'w-11/12 h-1/2 md:h-1/2 md:w-3/4'
+            : 'w-11/12 h-2/3 md:h-1/2 md:w-3/4'
         } z-10 transition-all duration-500 rounded-md overflow-hidden shadow-md absolute md:w-3/4 md:h-1/2 bottom-28 inset-x-0 mx-auto`}
       >
         {/* Guess map (world map) */}
