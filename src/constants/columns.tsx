@@ -27,7 +27,7 @@ const COLUMNS: ColumnDef<TLeaderboardData>[] = [
       return (
         <p className="font-customSans font-bold">
           {formattedScore}{' '}
-          <span className="text-xs text-sky-700 dark:text-sky-300 font-bold">
+          <span className={`${score > 1 ? 'text-stone-700 dark:text-stone-300' : 'text-sky-700 dark:text-sky-300'} text-xs font-bold`}>
             {score > 1 ? 'km' : 'm'}
           </span>
         </p>
